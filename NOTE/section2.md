@@ -70,3 +70,7 @@ Next.js에서 API를 구축할 수 있게 해주는 기능
 ---
 
 ### Global Layout
+
+---
+
+###
