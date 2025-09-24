@@ -56,3 +56,17 @@ npm run build
 npm run start
 
 ---
+
+### API Routes
+
+Next.js에서 API를 구축할 수 있게 해주는 기능
+
+![alt text](image-8.png)
+
+---
+
+### css modlue
+
+---
+
+### Global Layout
