@@ -105,3 +105,77 @@ Next.js에서 API를 구축할 수 있게 해주는 기능
   - 향후에 다룰 사전 렌더링 방식
 
 ---
+
+## SSR (서버 사이드 렌더링)
+
+- 가장 기본적인 사전 렌더링 방식
+- 요청이 들어올 때 마다 사전 렌더링 진행
+
+```
+export const getServerSideProps = () => {
+
+  // 컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터 불러오는 함수
+
+  const data = "hello";
+
+  return {
+    props: {
+      data,
+    },
+  };
+};
+```
+
+=> 객체 형태로 return
+
+---
+
+#### window, document 같은 브라우저 전역을 서버에서 접근하면 에러가 날 수 있음
+
+- console.log(window), window.location 등
+- Next.js는 먼저 서버에서 렌더(SSR/프리렌더) 후에 클라이언트에서 하이드레이션한다.
+
+  그래서 서버 단계에선 브라우저 API가 없다 → 접근 시 ReferenceError/크래시 가능.
+
+  => 해결: 클라이언트에서만 실행되게 보장
+
+  - useEffect 안에서 실행(마운트 이후, 브라우저에서만 동작)
+
+---
+
+#### SSR props 타입을 어떻게 줘야할지 ?
+
+`InferGetServerSidePropsType<typeof getServerSideProps>`
+
+InferGetServerSidePropsType => 자동으로 추론해줌
+
+![alt text](image-13.png)
+
+---
+
+### promise.all 병렬 실행
+
+#### 01 기존 방식
+
+```
+const allBooks = await fetchBooks();
+const recoBooks = await fetchRandomBooks();
+
+```
+
+=> fetchBooks()가 끝날 때까지 기다린 뒤 → fetchRandomBooks() 실행
+
+실행 순서 보장은 되지만, 두 함수가 서로 의존하지 않는 경우에는 불필요하게 느려짐
+
+#### 02 Promise.all 병렬 실행
+
+```
+const [allBooks, recoBooks] = await Promise.all([
+  fetchBooks(),
+  fetchRandomBooks(),
+]);
+```
+
+=> 두 함수를 동시에 실행 → 서로 의존하지 않는 비동기 작업이면 병렬 처리로 시간 절약 가능
+
+---
