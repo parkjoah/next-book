@@ -179,3 +179,121 @@ const [allBooks, recoBooks] = await Promise.all([
 => 두 함수를 동시에 실행 → 서로 의존하지 않는 비동기 작업이면 병렬 처리로 시간 절약 가능
 
 ---
+
+## SSG (정적 사이트 생성)
+
+![alt text](image-14.png)
+
+SSR의 데이터 요청이 늦어질 경우의 단점을 해결하기 위해 존재하는 두번째 사전 렌더링 방식
+
+- 빌드타임에 미리 사전 렌더링
+
+- **단점..?** 매번 똑같은 페이지만 응답해서, 최신 데이터 반영이 어려움
+  - 정적인 페이지들에 적합한 방식
+
+---
+
+### SSG - 정적 경로에 적용..?
+
+`getStaticProps`
+
+![alt text](image-16.png)
+
+- 흰 동그라미는 SSG
+- 빈 동그라미는 우리가 아직 API 작업을 하지 않은 부분들임..
+  - 해당 페이지들도 빌드시에 불러옴 => 기본적으로 SSG방식으로 작동
+
+---
+
+#### search 페이지 ---> query
+
+![alt text](image-17.png)
+
+빌드 타임에 페이지를 가져오는 SSG방식에선 query가 없음..
+
+-> 그럼에도 SSG 방식으로 바꾸고 싶으면 React에서 하던 것처럼 fetching 진행해야함....
+
+```
+const router = useRouter();
+  const { q } = router.query;
+
+  const [books, setBooks] = useState<BookData[]>([]);
+
+  const fetchSearchResult = async () => {
+    const data = await fetchBooks(q as string);
+    setBooks(data);
+  };
+
+  useEffect(() => {
+    if (q) {
+      //검색 결과를 불러오는 로직
+      fetchSearchResult();
+    }
+  }, [q]);
+```
+
+---
+
+### SSG - 동적 경로
+
+![alt text](image-18.png)
+
+-> `[id].tsx`
+
+![alt text](image-19.png)
+
+![alt text](image-20.png)
+
+-> 어떤 경로들이 있을 수 있는지를 설정해야함.
+
+`getStaticPaths` 설정
+
+```
+export const getStaticPaths = () => {
+  return {
+    paths: [
+      { params: { id: "1" } },
+      { params: { id: "2" } },
+      { params: { id: "3" } },
+    ],
+    fallback: false, // 대체, 대비책, 보험 느낌...
+    // false -> 존재 x -> 404로..
+  };
+};
+```
+
+---
+
+### SSG - fallback options
+
+fallback상태 : 페이지 컴포넌트가 아직 서버로부터 데이터를 전달받지 못한 상태
+
+![alt text](image-21.png)
+
+#### 01 false : 404 NotFound 반환
+
+- 위에서 본 예시
+- 경로 설정 외엔 404 반환
+
+#### 02 blocking : 즉시 생성 (SSR처럼)
+
+![alt text](image-22.png)
+
+- 사전에 path로 설정한 1~3페이지는 SSG방식으로,,
+- 다른 페이지를 요청하면 SSR처럼 즉시 생성됨
+
+#### 03 true : 즉시 생성 + 페이지만 미리 반환
+
+![alt text](image-23.png)
+
+- blocking으로 할 경우, 만약 생성 대기시간이 길어지는 상황을 해결하기 위한 방식
+- props가 없는 페이지를 반환 후, props를 계산해서 따로 반환
+
+  => 데이터 있는 페이지 렌더링
+
+꼭 fallback 상태에서만 안나오게 하고, fallback이 끝난 후를 분리해줘야함
+
+```
+  const router = useRouter();
+  if (router.isFallback) return "로딩중입니다";
+```
