@@ -297,3 +297,82 @@ fallback상태 : 페이지 컴포넌트가 아직 서버로부터 데이터를 �
   const router = useRouter();
   if (router.isFallback) return "로딩중입니다";
 ```
+
+---
+
+---
+
+## ISR (Incremental Static Regeneration)
+
+### : 증분 정적 재 생성
+
+=> SSG 방식으로 생성된 정적 페이지를 일정 시간을 주기로 다시 생성하는 기술
+
+![alt text](image-24.png)
+
+![alt text](image-25.png)
+
+```
+export const getStaticProps = async () => {
+  // 컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터 불러오는 함수
+
+  const [allBooks, recoBooks] = await Promise.all([
+    fetchBooks(),
+    fetchRandomBooks(),
+  ]);
+
+  // const allBooks = await fetchBooks();
+  // const recoBooks = await fetchRandomBooks();
+
+  return {
+    props: { allBooks, recoBooks },
+    revalidate: 3,
+  };
+};
+```
+
+=> revalidate 추가
+
+---
+
+#### 시간 기반의 ISR을 적용하기 어려운 페이지들 존재
+
+=> 시간과 관계없이 사용자의 행동에 따라 데이터가 업데이트 되는 페이지
+
+ex. 커뮤니티의 게시글 페이지 -> 수정, 삭제
+
+-> 요청을 받을 때마다 페이지를 다시 생성하는 ISR
+
+---
+
+### ISR 주문형 재 검증 (On-Demand-ISR)
+
+요청을 받을 때마다 페이지를 다시 생성하는 ISR
+
+![alt text](image-26.png)
+
+```
+import { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  try {
+    await res.revalidate(`/`);
+    return res.json({ revalidate: true });
+  } catch (err) {
+    res.status(500).send("Revalidation Failed");
+    console.log(err);
+  }
+}
+```
+
+---
+
+## SEO 설정
+
+- favicon
+- thumbnail
+
+`import Head from "next/head";`
