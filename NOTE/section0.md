@@ -27,6 +27,6 @@ Vercel 에서 개발.. open sorce로 활용되는 중..
 주도권 - 개발자 => 라이브러리
 주도권 - 개발자 x => 프레임워크
 
-![alt text](image.png)
+![alt text](./img/image.png)
 
 ---

@@ -14,13 +14,13 @@ item.js  ---- ~/mypage
 >
 > 폴더의 이름으로도 가능 ~
 
-![alt text](image-6.png)
+![alt text](./img/image-6.png)
 
 ### 동적 경로 (Dynamic ROUTES)
 
 ~/item/1 같은 동적경로도 가능
 
-![alt text](image-7.png)
+![alt text](./img/image-7.png)
 
 ---
 
@@ -61,7 +61,7 @@ npm run start
 
 Next.js에서 API를 구축할 수 있게 해주는 기능
 
-![alt text](image-8.png)
+![alt text](./img/image-8.png)
 
 ---
 
@@ -77,20 +77,20 @@ Next.js에서 API를 구축할 수 있게 해주는 기능
 
 #### 01 기존의 react app 에서의 데이터 페칭
 
-![alt text](image-9.png)
+![alt text](./img/image-9.png)
 
 => 초기 접속 요청부터 데이터 로딩까지 오랜 시간이 걸림
 
 #### 02 next app 에서의 데이터 페칭
 
 => 사전 렌더링
-![alt text](image-11.png)
+![alt text](./img/image-11.png)
 
 ---> 만약 요청이 오래걸리면 ?
 
 그런 요청들은 next가 build 타임에 미리 사전렌더링을 마춰두도록 설정함...
 
-![alt text](image-12.png)
+![alt text](./img/image-12.png)
 
 ---
 
@@ -149,7 +149,7 @@ export const getServerSideProps = () => {
 
 InferGetServerSidePropsType => 자동으로 추론해줌
 
-![alt text](image-13.png)
+![alt text](./img/image-13.png)
 
 ---
 
@@ -182,7 +182,7 @@ const [allBooks, recoBooks] = await Promise.all([
 
 ## SSG (정적 사이트 생성)
 
-![alt text](image-14.png)
+![alt text](./img/image-14.png)
 
 SSR의 데이터 요청이 늦어질 경우의 단점을 해결하기 위해 존재하는 두번째 사전 렌더링 방식
 
@@ -197,7 +197,7 @@ SSR의 데이터 요청이 늦어질 경우의 단점을 해결하기 위해 존
 
 `getStaticProps`
 
-![alt text](image-16.png)
+![alt text](./img/image-16.png)
 
 - 흰 동그라미는 SSG
 - 빈 동그라미는 우리가 아직 API 작업을 하지 않은 부분들임..
@@ -207,7 +207,7 @@ SSR의 데이터 요청이 늦어질 경우의 단점을 해결하기 위해 존
 
 #### search 페이지 ---> query
 
-![alt text](image-17.png)
+![alt text](./img/image-17.png)
 
 빌드 타임에 페이지를 가져오는 SSG방식에선 query가 없음..
 
@@ -236,13 +236,13 @@ const router = useRouter();
 
 ### SSG - 동적 경로
 
-![alt text](image-18.png)
+![alt text](./img/image-18.png)
 
 -> `[id].tsx`
 
-![alt text](image-19.png)
+![alt text](./img/image-19.png)
 
-![alt text](image-20.png)
+![alt text](./img/image-20.png)
 
 -> 어떤 경로들이 있을 수 있는지를 설정해야함.
 
@@ -268,7 +268,7 @@ export const getStaticPaths = () => {
 
 fallback상태 : 페이지 컴포넌트가 아직 서버로부터 데이터를 전달받지 못한 상태
 
-![alt text](image-21.png)
+![alt text](./img/image-21.png)
 
 #### 01 false : 404 NotFound 반환
 
@@ -277,14 +277,14 @@ fallback상태 : 페이지 컴포넌트가 아직 서버로부터 데이터를 �
 
 #### 02 blocking : 즉시 생성 (SSR처럼)
 
-![alt text](image-22.png)
+![alt text](./img/image-22.png)
 
 - 사전에 path로 설정한 1~3페이지는 SSG방식으로,,
 - 다른 페이지를 요청하면 SSR처럼 즉시 생성됨
 
 #### 03 true : 즉시 생성 + 페이지만 미리 반환
 
-![alt text](image-23.png)
+![alt text](./img/image-23.png)
 
 - blocking으로 할 경우, 만약 생성 대기시간이 길어지는 상황을 해결하기 위한 방식
 - props가 없는 페이지를 반환 후, props를 계산해서 따로 반환
@@ -308,9 +308,9 @@ fallback상태 : 페이지 컴포넌트가 아직 서버로부터 데이터를 �
 
 => SSG 방식으로 생성된 정적 페이지를 일정 시간을 주기로 다시 생성하는 기술
 
-![alt text](image-24.png)
+![alt text](./img/image-24.png)
 
-![alt text](image-25.png)
+![alt text](./img/image-25.png)
 
 ```
 export const getStaticProps = async () => {
@@ -349,7 +349,7 @@ ex. 커뮤니티의 게시글 페이지 -> 수정, 삭제
 
 요청을 받을 때마다 페이지를 다시 생성하는 ISR
 
-![alt text](image-26.png)
+![alt text](./img/image-26.png)
 
 ```
 import { NextApiRequest, NextApiResponse } from "next";
