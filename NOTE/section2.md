@@ -376,3 +376,36 @@ export default async function handler(
 - thumbnail
 
 `import Head from "next/head";`
+
+---
+
+### 배포
+
+vercel global 설치
+
+`npm install -g vercel`
+
+mac os 는 권한 오류가 발생 할 수 있음
+
+=> `sudo npm install -g vercel`
+
+production 모드로
+`vercel --prod`
+
+---
+
+### Page Router 정리
+
+장점
+
+- 파일 시스템 기반의 간편한 페이지 라우팅 제공
+- 다양한 방식의 사전 렌더링 제공
+
+단점
+
+- 페이지별로 레이아웃 설정이 번거로움
+- 데이터 페칭이 페이지 컴포넌트에 집중한다
+- 뷸필요한 컴포넌트들도 JS Bundle에 포함된다 (상호작용이 없는 페이지들..)
+
+=> App Router에서는 React Server Component
+상호 작용이 없는 컴포넌트 -> js bundle에 미포함
