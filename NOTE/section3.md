@@ -99,3 +99,34 @@ app router에서는 파일 이름이 page나 layout이 아니면 컴포넌트로
 근데 자바스크립트 함수는 직렬화가 불가능함 !!!
 
 ---
+
+### 네비게이팅
+
+![alt text](image-7.png)
+
+app router도 기본적으로 client side render 방식..
+
+하지막 js bundle은 client component만 담고, RSC Payload에 server component 결과를 보냄
+
+---
+
+global navigation bar
+
+---
+
+![alt text](image-8.png)
+
+=> next/router 는 pagerRouter
+
+=> next/navigation은 appRouter
+
+---
+
+#### app router의 프리패칭
+
+프리패칭은 연결된 이동 가능성이 있는 모든페이지의 데이터를 미리 불러와 놓는 기능..
+
+(static) ---> RSC, JS bundle
+(dynamic) ---> RSC
+
+---
