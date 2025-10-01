@@ -21,7 +21,7 @@
 
 `page.tsx` ~/
 
-![alt text](image.png)
+![alt text](./img/s3/image.png)
 
 app router에서는 query,url parameter 같은 경로상에 포함되는 것들이 Page 컴포넌트에게 props로 전달됨
 
@@ -31,11 +31,11 @@ app router에서는 query,url parameter 같은 경로상에 포함되는 것들�
 
 `layout.tsx`
 
-![alt text](image-1.png)
+![alt text](./img/s3/image-1.png)
 
-![alt text](image-2.png)
+![alt text](./img/s3/image-2.png)
 
-![alt text](image-3.png)
+![alt text](./img/s3/image-3.png)
 
 ---
 
@@ -55,11 +55,11 @@ react 18v부터 새롭게 추가된 유형의 컴포넌트
 
 서버측에서만 실행 되는 컴포넌트 (브라우저에서 실행 x)
 
-![alt text](image-4.png)
+![alt text](./img/s3/image-4.png)
 
 상호작용이 없는 컴포넌트들은 js bundle에서 한번 더 실행되는 것을 방지
 
-![alt text](image-5.png)
+![alt text](./img/s3/image-5.png)
 
 > app router의 컴포넌트들은 default로 서버컴포넌트임
 
@@ -94,7 +94,7 @@ app router에서는 파일 이름이 page나 layout이 아니면 컴포넌트로
 
 객체, 배열, 클래스 등의 복잡한 구조의 데이터를 네트워크 상으로 전송하기 위해 아주 단순한 형태(문자열, byte)로 변환하는 것
 
-![alt text](image-6.png)
+![alt text](./img/s3/image-6.png)
 
 근데 자바스크립트 함수는 직렬화가 불가능함 !!!
 
@@ -102,7 +102,7 @@ app router에서는 파일 이름이 page나 layout이 아니면 컴포넌트로
 
 ### 네비게이팅
 
-![alt text](image-7.png)
+![alt text](./img/s3/image-7.png)
 
 app router도 기본적으로 client side render 방식..
 
@@ -114,7 +114,7 @@ global navigation bar
 
 ---
 
-![alt text](image-8.png)
+![alt text](./img/s3/image-8.png)
 
 => next/router 는 pagerRouter
 
