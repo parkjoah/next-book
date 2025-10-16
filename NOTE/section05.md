@@ -100,3 +100,24 @@ export const dynamicParams =false;
 generateStaticParams로 내보내진 값을 제외하고는 404 !
 
 ---
+
+## 라우트 세그먼트 옵션
+
+페이지의 동작(캐싱, revalidate)을 강제로 설정할 수 있는 옵션
+
+### dynamic
+
+특정 페이지의 유형을 강제로 static, dynamic 페이지로 설정
+
+```
+export const dynamic = ''
+```
+
+1. auto : 기본값, 아무것도 강제하지 않음
+2. force-dynamic : 페이지를 강제로 dynamic 페이지로 설정
+3. force-static : 페이지를 강제로 static 페이지로 설정
+4. error : 페이지를 강제로 static 페이지 설정 (설정하면 안되는 이유 있으면-> 빌드 오류)
+
+=> 사용하지 않는 것을 권장...
+
+---
