@@ -43,3 +43,22 @@ fallback으로 대체 ui 넘기기
 Suspense에 key 넣어주기 -> key에 따라 다시 로딩
 
 ---
+
+### 스켈레톤(skeleton) UI
+
+뼈대 역할을 하는 UI
+
+- 직접 만들거나
+- react loading skeleton
+
+---
+
+### 에러 핸들링
+
+그 전엔 try-catch를 했었는데 next가 제공하는 방법
+
+error파일을 만들면 해당 경로에 있는 파일들에 에러상황에서의 대체 ui를 설정하는 것과 동일함...
+
+-> client component로 설정
+
+---
