@@ -1,5 +1,6 @@
 import BookItem from "@/components/book-item";
 import style from "./page.module.css";
+import books from "@/mock/books.json";
 import { BookData } from "@/types";
 
 // export const dynamic = "force-dynamic";
